@@ -8,7 +8,7 @@
 MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['', ''], ['\\[', '\\]']]
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
   }
 };
 </script>
@@ -479,7 +479,7 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="token-math fade-in glass-panel">
     <div style="color: #8a8faa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Token Leakage Formula</div>
     <div style="font-size: 18px; margin: 20px 0;">
-       \text{Cost} = \sum_{i=1}^{k} \left( T_{\text{ls}} + T_{\text{read}} \right) \sim \mathcal{O}(N \cdot T) 
+      $$ \text{Cost} = \sum_{i=1}^{k} \left( T_{\text{ls}} + T_{\text{read}} \right) \sim \mathcal{O}(N \cdot T) $$
     </div>
     <div style="color: var(--red); font-weight: 600; font-family: var(--mono); font-size: 15px; margin-top: 20px;">
       Unbounded \(\mathcal{O}(N)\) Growth
@@ -535,7 +535,7 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="solution-math fade-in glass-panel">
     <div style="color: #8a8faa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Retrieval Target Formula</div>
     <div style="font-size: 18px; margin: 20px 0;">
-       \text{Target} = \text{argmax}_{f \in F} \left( \frac{\mathbf{v}_{\text{intent}} \cdot \mathbf{v}_f}{\|\mathbf{v}_{\text{intent}}\| \|\mathbf{v}_f\|} \right) 
+      $$ \text{Target} = \text{argmax}_{f \in F} \left( \frac{\mathbf{v}_{\text{intent}} \cdot \mathbf{v}_f}{\|\mathbf{v}_{\text{intent}}\| \|\mathbf{v}_f\|} \right) $$
     </div>
     <div style="color: var(--green); font-weight: 600; font-family: var(--mono); font-size: 15px; margin-top: 20px;">
       Constant \(\mathcal{O}(1)\) Time \(= 15\) tokens
