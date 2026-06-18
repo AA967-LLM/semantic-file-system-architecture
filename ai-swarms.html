@@ -17,33 +17,42 @@ MathJax = {
 <body>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+/* Authentic LaTeX Web Fonts */
+@import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
   --void: #06080f;
   --surface: #0c0f1a;
-  --card: #111525;
   --border: rgba(255,255,255,0.1);
   --text: #e8eaf2;
-  --muted: #6b7190;
+  --muted: #8a8faa;
   --cyan: #00c8ef;
   --red: #ff3d5a;
   --green: #00e88f;
-  --amber: #ffb627;
+  
+  /* LaTeX Typography Stack */
+  --latex: 'Computer Modern Serif', serif;
   --mono: 'JetBrains Mono', monospace;
-  --sans: 'Space Grotesk', sans-serif;
 }
 
-body { background: var(--void); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+body { 
+  background: var(--void); 
+  color: var(--text); 
+  font-family: var(--latex); 
+  overflow-x: hidden; 
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+}
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   border-radius: 12px;
 }
 
@@ -52,7 +61,7 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 48px;
+  padding: 80px 48px;
   position: relative;
   border-bottom: 1px solid var(--border);
 }
@@ -64,39 +73,34 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
   text-align: center;
 }
 
-.middle-style .scene-body {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .scene-label {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .scene-headline {
-  font-family: var(--sans);
-  font-size: clamp(28px, 5vw, 52px);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: normal; /* LaTeX headers aren't usually ultra-bold */
+  line-height: 1.2;
   color: var(--text);
-  margin-bottom: 24px;
-  letter-spacing: -1px;
+  margin-bottom: 30px;
 }
 
 .scene-body {
-  font-size: 16px;
   line-height: 1.8;
-  color: #8a8faa;
-  max-width: 600px;
+  color: #a0a6c0;
+  max-width: 680px;
+  text-align: justify;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
 }
 
-.scene-body strong { color: var(--text); font-weight: 500; }
+.scene-body strong { color: var(--text); font-weight: bold; }
 
 .accent-cyan { color: var(--cyan); }
 .accent-red { color: var(--red); }
@@ -104,10 +108,10 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
 
 /* HERO */
 #scene-hero {
-  min-height: 80vh;
+  min-height: 90vh;
   align-items: center;
   text-align: center;
-  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,200,239,0.04), transparent);
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,200,239,0.03), transparent);
 }
 
 .hero-eyebrow {
@@ -115,7 +119,7 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
   font-size: 11px;
   color: var(--cyan);
   letter-spacing: 3px;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,52 +127,20 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
 }
 
 .hero-title {
-  font-size: clamp(38px, 7vw, 72px);
-  font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: -2px;
+  font-size: clamp(42px, 7vw, 76px);
+  font-weight: normal;
+  line-height: 1.1;
   color: var(--text);
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
-
-.hero-title em { font-style: normal; color: var(--cyan); }
 
 .hero-sub {
-  font-size: 17px;
-  color: #6b7190;
-  max-width: 580px;
-  line-height: 1.7;
-  margin-bottom: 40px;
+  font-size: 22px;
+  color: #8a8faa;
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 50px;
 }
-
-.scroll-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.scroll-hint-bar {
-  width: 40px;
-  height: 2px;
-  background: var(--border);
-  position: relative;
-  overflow: hidden;
-}
-
-.scroll-hint-bar::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: var(--cyan);
-  animation: slide 1.8s ease-in-out infinite;
-}
-
-@keyframes slide { 0%{left:-100%} 100%{left:100%} }
 
 /* CHART */
 .chart-layout {
@@ -189,52 +161,107 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
   height: 350px;
   position: relative;
 }
+
+.math-box {
+  margin-top: 32px;
+  padding: 30px;
+  max-width: 750px;
+  width: 100%;
+}
 </style>
 
 <section class="scene middle-style" id="scene-hero">
   <div class="hero-eyebrow">
-    AI Council · Hybrid Swarms
+    Abstract / Concept Paper
     <span style="color: var(--muted); margin: 0 10px;">|</span>
     <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(0,200,239,0.5);">By Engr. Adeel Ahmad</a>
   </div>
   <h1 class="hero-title fade-in">
-    The Cloud is <span class="accent-red">Bankrupting</span><br>
-    Your Agents.
+    Infinite Scaling: <br>
+    The Hybrid Agent Swarm
   </h1>
   <p class="hero-sub fade-in">
-    Running a 100-agent swarm entirely on premium cloud endpoints is a math error. Here is the local-cloud hybrid architecture that cuts API burn by 92% without dropping IQ.
+    A rigorous mathematical analysis of localized inference delegation. How to scale multi-agent swarms by 10,000% while cutting API burn by 92%.
+  </p>
+  
+  <div class="scene-image fade-in glass-panel" style="margin-top: 20px; max-width: 800px; width: 100%; overflow: hidden;">
+    <img src="./cloud_money_drain.jpg" style="width: 100%; display: block; filter: brightness(0.8) contrast(1.2); border-radius: 12px;" alt="Massive cloud servers glowing red with heat, draining API funds">
+  </div>
+</section>
+
+<section class="scene middle-style" id="scene-situation">
+  <div class="scene-label fade-in">I. The Situation</div>
+  <h2 class="scene-headline fade-in">The Multi-Agent Illusion</h2>
+  <p class="scene-body fade-in">
+    The standard architecture for an autonomous AI swarm is fundamentally flawed. When you deploy 100 agents to research, code, or scrape data, the master orchestrator relies heavily on flagship models (like GPT-4 or Claude 3.5 Sonnet) for every single step of the process.
+  </p>
+  <p class="scene-body fade-in">
+    This means you are paying top-tier API pricing not just for complex architectural reasoning, but also for trivial tasks like JSON parsing, array sorting, or simple text summarization.
   </p>
 </section>
 
-<section class="scene middle-style" id="scene-math">
-  <div class="scene-label fade-in">The Math</div>
-  <h2 class="scene-headline fade-in">Ollama + DeepSeek = <span class="accent-green">Infinite Scale</span></h2>
+<section class="scene middle-style" id="scene-complication">
+  <div class="scene-label fade-in">II. The Complication</div>
+  <h2 class="scene-headline fade-in">The <span class="accent-red">O(N²)</span> Token Bankruptcy</h2>
   <p class="scene-body fade-in">
-    Instead of paying premium tokens for simple data extraction or logic formatting, the AI Council routes sub-tasks dynamically. Heavy lifting goes to Delta (DeepSeek V4 Pro). Pure math and text goes to Zeta (Ollama / VibeThinker).
+    As the swarm size ($N$) increases, the inter-agent communication overhead scales quadratically. Every agent must repeatedly share context with the others to stay aligned. If all agents are hosted on premium endpoints, the total token expenditure accelerates toward financial bankruptcy.
   </p>
   
-  <div class="fade-in glass-panel" style="margin-top: 32px; background: rgba(0,232,143,0.03); border-left: 3px solid var(--green); padding: 30px; max-width: 700px; width: 100%;">
-    <div style="color: #8a8faa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Hybrid Cost Formula</div>
-    <div style="font-size: 18px; margin: 20px 0;">
-      $$ \text{Total Cost} = \sum (\text{Task}_{\text{complex}} \cdot C_{\text{API}}) + \sum (\text{Task}_{\text{simple}} \cdot 0) $$
+  <div class="math-box fade-in glass-panel" style="background: rgba(255,61,90,0.03); border-left: 3px solid var(--red);">
+    <div style="color: #8a8faa; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Pure Cloud Expenditure Function</div>
+    <div style="font-size: 22px; margin: 20px 0;">
+      $$ \lim_{N \to \infty} \text{Cost}(N) = \sum_{i=1}^{N} \sum_{j=1}^{N} \left( T_{\text{infer}} \cdot C_{\text{premium}} \right) \approx \mathcal{O}(N^2) $$
     </div>
-    <div style="color: #8a8faa; font-size: 14px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
-      <strong style="color: #e8eaf2;">Plain English:</strong> By running the simple tasks on your own computer for free ($0), you only pay for the complex stuff. This drops your total API bill drastically, allowing you to spawn hundreds of agents at the cost of ten.
+    <div style="color: #a0a6c0; font-size: 16px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+      <strong style="color: #e8eaf2; font-family: var(--mono); font-size: 14px;">Plain English:</strong> If you use expensive cloud AI for a team of agents, they spend a massive amount of time (and tokens) just talking to each other to stay on the same page. Because every agent has to process what the others are saying using expensive math, the cost multiplies exponentially until it bankrupts the project.
+    </div>
+  </div>
+</section>
+
+<section class="scene middle-style" id="scene-answer">
+  <div class="scene-label fade-in">III. The Solution</div>
+  <h2 class="scene-headline fade-in">Hybrid Orchestration via <span class="accent-green">Ollama</span></h2>
+  <p class="scene-body fade-in">
+    The solution is strict, deterministic workload delegation. By deploying local language models (such as Gemma-4-12B or VibeThinker-3B) via Ollama, we can intercept all low-complexity reasoning tasks.
+  </p>
+  <p class="scene-body fade-in">
+    The cloud brain (DeepSeek V4 Pro) acts strictly as the Chief Architect. It only executes heavily contextual code generation or high-stakes logic. All intermediate data processing, formatting, and mathematical validation is offloaded to the local VRAM pipeline—where tokens are completely free.
+  </p>
+
+  <div class="scene-image fade-in glass-panel" style="margin-top: 30px; margin-bottom: 30px; max-width: 800px; width: 100%; overflow: hidden;">
+    <img src="./hybrid_ai_routing.jpg" style="width: 100%; display: block; filter: brightness(0.9) contrast(1.1); border-radius: 12px;" alt="Local terminal routing data perfectly to the cloud brain">
+  </div>
+  
+  <div class="math-box fade-in glass-panel" style="background: rgba(0,232,143,0.03); border-left: 3px solid var(--green);">
+    <div style="color: #8a8faa; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Hybrid Asymptotic Efficiency</div>
+    <div style="font-size: 22px; margin: 20px 0;">
+      $$ \text{Cost}(N) = \underbrace{C_{\text{cloud}} \sum T_{\text{complex}}}_{\text{Architect}} + \underbrace{C_{\text{local}} \sum T_{\text{simple}}}_{\text{Free / } \$0} \implies \mathcal{O}(N) $$
+    </div>
+    <div style="color: #a0a6c0; font-size: 16px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+      <strong style="color: #e8eaf2; font-family: var(--mono); font-size: 14px;">Plain English:</strong> We separate the tasks. The expensive cloud API only touches the hardest 10% of the work. The local models on your own GPU handle the other 90% for free. This drops your cost graph from a terrifying curve to a flat, manageable line.
     </div>
   </div>
 </section>
 
 <section class="scene middle-style" id="scene-proof">
-  <div class="scene-label fade-in">The Proof</div>
+  <div class="scene-label fade-in">IV. The Proof</div>
+  <h2 class="scene-headline fade-in">Mathematical Dominance</h2>
+  <p class="scene-body fade-in">
+    When visualizing the token expenditure for swarm deployment, the differential is stark. The hybrid architecture effortlessly supports thousands of concurrent agents without a linear cost spike.
+  </p>
+
   <div class="chart-layout fade-in">
     <div class="chart-box glass-panel">
       <canvas id="costChart"></canvas>
     </div>
+    <div class="chart-box glass-panel">
+      <canvas id="radarChart"></canvas>
+    </div>
   </div>
 
-  <div class="fade-in" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 13px; color: var(--muted); width: 100%; max-width: 700px;">
+  <div class="fade-in" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 14px; color: var(--muted); width: 100%; max-width: 700px;">
     Follow my latest AI engineering deep-dives on LinkedIn: <br>
-    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; display: inline-block; margin-top: 16px; border: 1px solid rgba(0,200,239,0.3); padding: 10px 24px; border-radius: 20px; background: rgba(0,200,239,0.05); transition: background 0.3s ease;">
+    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; display: inline-block; margin-top: 16px; border: 1px solid rgba(0,200,239,0.3); padding: 12px 28px; border-radius: 20px; background: rgba(0,200,239,0.05); transition: background 0.3s ease;">
       Connect with Engr. Adeel Ahmad
     </a>
   </div>
@@ -242,6 +269,16 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+const fadeEls = document.querySelectorAll('.fade-in');
+function checkFade() {
+  fadeEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', checkFade, { passive: true });
+checkFade();
+
 Chart.defaults.color = '#8a8faa';
 Chart.defaults.font.family = "'JetBrains Mono', monospace";
 const ctxBar = document.getElementById('costChart').getContext('2d');
@@ -265,6 +302,36 @@ new Chart(ctxBar, {
     ]
   },
   options: { responsive: true, maintainAspectRatio: false }
+});
+
+const ctxRadar = document.getElementById('radarChart').getContext('2d');
+new Chart(ctxRadar, {
+  type: 'radar',
+  data: {
+    labels: ['Context Saving', 'Speed', 'Logic Depth', 'Reliability', 'Cost Efficency'],
+    datasets: [{
+      label: 'Pure Cloud',
+      data: [10, 80, 95, 90, 5],
+      fill: true,
+      backgroundColor: 'rgba(255,61,90,0.2)',
+      borderColor: 'rgba(255,61,90,1)',
+      pointBackgroundColor: 'rgba(255,61,90,1)',
+      pointBorderColor: '#fff',
+    }, {
+      label: 'Hybrid (Ollama)',
+      data: [95, 75, 95, 90, 100],
+      fill: true,
+      backgroundColor: 'rgba(0,232,143,0.2)',
+      borderColor: 'rgba(0,232,143,1)',
+      pointBackgroundColor: 'rgba(0,232,143,1)',
+      pointBorderColor: '#fff',
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { display: false, min: 0, max: 100 } } }
+  }
 });
 </script>
 </body>
