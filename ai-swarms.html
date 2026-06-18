@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Scaling: The Hybrid Agent Swarm</title>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --void: #06080f;
+  --surface: #0c0f1a;
+  --card: #111525;
+  --border: rgba(255,255,255,0.1);
+  --text: #e8eaf2;
+  --muted: #6b7190;
+  --cyan: #00c8ef;
+  --red: #ff3d5a;
+  --green: #00e88f;
+  --amber: #ffb627;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Space Grotesk', sans-serif;
+}
+
+body { background: var(--void); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+}
+
+.scene {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 48px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+
+.middle-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.middle-style .scene-body {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.scene-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.scene-headline {
+  font-family: var(--sans);
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.scene-body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #8a8faa;
+  max-width: 600px;
+}
+
+.scene-body strong { color: var(--text); font-weight: 500; }
+
+.accent-cyan { color: var(--cyan); }
+.accent-red { color: var(--red); }
+.accent-green { color: var(--green); }
+
+/* HERO */
+#scene-hero {
+  min-height: 80vh;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,200,239,0.04), transparent);
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-title {
+  font-size: clamp(38px, 7vw, 72px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.hero-title em { font-style: normal; color: var(--cyan); }
+
+.hero-sub {
+  font-size: 17px;
+  color: #6b7190;
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.scroll-hint-bar {
+  width: 40px;
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-hint-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--cyan);
+  animation: slide 1.8s ease-in-out infinite;
+}
+
+@keyframes slide { 0%{left:-100%} 100%{left:100%} }
+
+/* CHART */
+.chart-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+@media (min-width: 800px) {
+  .chart-layout { flex-direction: row; }
+}
+
+.chart-box {
+  flex: 1;
+  padding: 24px;
+  height: 350px;
+  position: relative;
+}
+</style>
+
+<section class="scene middle-style" id="scene-hero">
+  <div class="hero-eyebrow">
+    AI Council · Hybrid Swarms
+    <span style="color: var(--muted); margin: 0 10px;">|</span>
+    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(0,200,239,0.5);">By Engr. Adeel Ahmad</a>
+  </div>
+  <h1 class="hero-title fade-in">
+    The Cloud is <span class="accent-red">Bankrupting</span><br>
+    Your Agents.
+  </h1>
+  <p class="hero-sub fade-in">
+    Running a 100-agent swarm entirely on premium cloud endpoints is a math error. Here is the local-cloud hybrid architecture that cuts API burn by 92% without dropping IQ.
+  </p>
+</section>
+
+<section class="scene middle-style" id="scene-math">
+  <div class="scene-label fade-in">The Math</div>
+  <h2 class="scene-headline fade-in">Ollama + DeepSeek = <span class="accent-green">Infinite Scale</span></h2>
+  <p class="scene-body fade-in">
+    Instead of paying premium tokens for simple data extraction or logic formatting, the AI Council routes sub-tasks dynamically. Heavy lifting goes to Delta (DeepSeek V4 Pro). Pure math and text goes to Zeta (Ollama / VibeThinker).
+  </p>
+  
+  <div class="fade-in glass-panel" style="margin-top: 32px; background: rgba(0,232,143,0.03); border-left: 3px solid var(--green); padding: 30px; max-width: 700px; width: 100%;">
+    <div style="color: #8a8faa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Hybrid Cost Formula</div>
+    <div style="font-size: 18px; margin: 20px 0;">
+      $$ \text{Total Cost} = \sum (\text{Task}_{\text{complex}} \cdot C_{\text{API}}) + \sum (\text{Task}_{\text{simple}} \cdot 0) $$
+    </div>
+    <div style="color: #8a8faa; font-size: 14px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+      <strong style="color: #e8eaf2;">Plain English:</strong> By running the simple tasks on your own computer for free ($0), you only pay for the complex stuff. This drops your total API bill drastically, allowing you to spawn hundreds of agents at the cost of ten.
+    </div>
+  </div>
+</section>
+
+<section class="scene middle-style" id="scene-proof">
+  <div class="scene-label fade-in">The Proof</div>
+  <div class="chart-layout fade-in">
+    <div class="chart-box glass-panel">
+      <canvas id="costChart"></canvas>
+    </div>
+  </div>
+
+  <div class="fade-in" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 13px; color: var(--muted); width: 100%; max-width: 700px;">
+    Follow my latest AI engineering deep-dives on LinkedIn: <br>
+    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; display: inline-block; margin-top: 16px; border: 1px solid rgba(0,200,239,0.3); padding: 10px 24px; border-radius: 20px; background: rgba(0,200,239,0.05); transition: background 0.3s ease;">
+      Connect with Engr. Adeel Ahmad
+    </a>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+Chart.defaults.color = '#8a8faa';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+const ctxBar = document.getElementById('costChart').getContext('2d');
+new Chart(ctxBar, {
+  type: 'bar',
+  data: {
+    labels: ['10 Agents', '50 Agents', '100 Agents', '500 Agents'],
+    datasets: [
+      {
+        label: 'Pure Cloud API ($)',
+        data: [12, 60, 120, 600],
+        backgroundColor: 'rgba(255,61,90,0.8)',
+        borderRadius: 4,
+      },
+      {
+        label: 'Hybrid Swarm ($)',
+        data: [1, 5, 10, 50],
+        backgroundColor: 'rgba(0,232,143,0.8)',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false }
+});
+</script>
+</body>
+</html>
