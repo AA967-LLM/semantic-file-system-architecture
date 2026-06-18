@@ -22,13 +22,14 @@ MathJax = {
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --void: #06080f;
-  --surface: #0c0f1a;
-  --card: #111525;
-  --border: rgba(255,255,255,0.1);
+  --void: #151515;
+  --surface: #212121;
+  --card: #2a2a2a;
+  --border: rgba(255,255,255,0.08);
   --text: #e8eaf2;
   --muted: #6b7190;
-  --cyan: #00c8ef;
+  --cyan: #E55B13;
+  --cyan-dark: #B7410E;
   --red: #ff3d5a;
   --green: #00e88f;
   --amber: #ffb627;
@@ -107,7 +108,7 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
   min-height: 80vh;
   align-items: center;
   text-align: center;
-  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,200,239,0.04), transparent);
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(229,91,19,0.04), transparent);
 }
 
 .hero-eyebrow {
@@ -172,7 +173,7 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
 
 /* ── SITUATION ── */
 #scene-situation {
-  background: radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,200,239,0.03), transparent);
+  background: radial-gradient(ellipse 50% 50% at 20% 80%, rgba(229,91,19,0.03), transparent);
 }
 
 .context-diagram {
@@ -195,8 +196,8 @@ body { background: var(--void); color: var(--text); font-family: var(--sans); ov
 }
 
 .cd-box.active {
-  border: 1px solid rgba(0,200,239,0.3);
-  background: rgba(0,200,239,0.04);
+  border: 1px solid rgba(229,91,19,0.3);
+  background: rgba(229,91,19,0.04);
   color: var(--cyan);
 }
 
@@ -305,7 +306,7 @@ input[type=range].styled::-webkit-slider-thumb {
   border-radius: 50%;
   background: var(--cyan);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0,200,239,0.5);
+  box-shadow: 0 0 10px rgba(229,91,19,0.5);
 }
 
 /* ── ANSWER ── */
@@ -409,7 +410,7 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="hero-eyebrow">
     Abstract / Concept Paper
     <span style="color: var(--muted); margin: 0 10px;">|</span>
-    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(0,200,239,0.5);">By Engr. Adeel Ahmad</a>
+    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; border-bottom: 1px dashed rgba(229,91,19,0.5);">By Engr. Adeel Ahmad</a>
   </div>
   <h1 class="hero-title fade-in">
     Infinite Scaling: <br>
@@ -577,7 +578,7 @@ input[type=range].styled::-webkit-slider-thumb {
 
   <div class="fade-in" style="margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 13px; color: var(--muted); width: 100%; max-width: 700px;">
     Follow my latest AI engineering deep-dives on LinkedIn: <br>
-    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; display: inline-block; margin-top: 16px; border: 1px solid rgba(0,200,239,0.3); padding: 10px 24px; border-radius: 20px; background: rgba(0,200,239,0.05); transition: background 0.3s ease;">
+    <a href="https://www.linkedin.com/in/engradeelahmad/recent-activity/all/" target="_blank" style="color: var(--cyan); text-decoration: none; display: inline-block; margin-top: 16px; border: 1px solid rgba(229,91,19,0.3); padding: 10px 24px; border-radius: 20px; background: rgba(229,91,19,0.05); transition: background 0.3s ease;">
       Connect with Engr. Adeel Ahmad
     </a>
   </div>
@@ -637,22 +638,30 @@ Chart.defaults.color = '#8a8faa';
 Chart.defaults.font.family = "'JetBrains Mono', monospace";
 
 const ctxBar = document.getElementById('costChart').getContext('2d');
+let gradient = ctxBar.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(229,91,19,0.8)');
+gradient.addColorStop(1, 'rgba(0,232,143,0.2)');
+
 new Chart(ctxBar, {
-  type: 'bar',
+  type: 'line',
   data: {
     labels: ['10 Agents', '50 Agents', '100 Agents', '500 Agents'],
     datasets: [
       {
         label: 'Pure Cloud API ($)',
         data: [12, 60, 120, 600],
-        backgroundColor: 'rgba(255,61,90,0.8)',
-        borderRadius: 4,
+        borderColor: 'rgba(138,143,170,1)',
+        backgroundColor: 'rgba(138,143,170,0.1)',
+        fill: true,
+        tension: 0.4
       },
       {
         label: 'Hybrid Swarm ($)',
         data: [1, 5, 10, 50],
-        backgroundColor: 'rgba(0,232,143,0.8)',
-        borderRadius: 4,
+        borderColor: 'rgba(229,91,19,1)',
+        backgroundColor: gradient,
+        fill: true,
+        tension: 0.4
       }
     ]
   },
@@ -687,22 +696,22 @@ new Chart(ctxRadar, {
       label: 'Pure Cloud',
       data: [10, 80, 95, 90, 5],
       fill: true,
-      backgroundColor: 'rgba(255,61,90,0.2)',
-      borderColor: 'rgba(255,61,90,1)',
-      pointBackgroundColor: 'rgba(255,61,90,1)',
+      backgroundColor: 'rgba(138,143,170,0.2)',
+      borderColor: 'rgba(138,143,170,1)',
+      pointBackgroundColor: 'rgba(138,143,170,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(255,61,90,1)'
+      pointHoverBorderColor: 'rgba(138,143,170,1)'
     }, {
       label: 'Hybrid (Ollama)',
       data: [95, 75, 95, 90, 100],
       fill: true,
-      backgroundColor: 'rgba(0,232,143,0.2)',
-      borderColor: 'rgba(0,232,143,1)',
-      pointBackgroundColor: 'rgba(0,232,143,1)',
+      backgroundColor: 'rgba(229,91,19,0.2)',
+      borderColor: 'rgba(229,91,19,1)',
+      pointBackgroundColor: 'rgba(229,91,19,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(0,232,143,1)'
+      pointHoverBorderColor: 'rgba(229,91,19,1)'
     }]
   },
   options: {
