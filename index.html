@@ -414,7 +414,7 @@ input[type=range].styled::-webkit-slider-thumb {
     in directories.
   </h1>
   <p class="hero-sub fade-in">
-    Every autonomous agent you've ever run was silently wasting thousands of tokens just <em>finding</em> the right file. Here's what's happening — and how we fixed it.
+    Every autonomous agent you've ever run was silently wasting thousands of tokens just <em>finding</em> the right file. Here is what is happening, and how we fixed it.
   </p>
   <div class="act-divider fade-in">
     <div class="act-divider-line"></div>
@@ -437,7 +437,7 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="scene-label fade-in">Act I · Situation</div>
   <h2 class="scene-headline fade-in">The agent needs<br>to <span class="accent-cyan">find</span> before it can <span class="accent-cyan">fix</span>.</h2>
   <p class="scene-body fade-in">
-    Every LLM operates inside a <strong>context window</strong> — a finite, precious workspace holding its instructions, logic, and working memory. When an agent is given a codebase to work on, it needs to locate the right files. The only tool it has is the file system itself.
+    Every LLM operates inside a <strong>context window</strong>: a finite, precious workspace holding its instructions, logic, and working memory. When an agent is given a codebase to work on, it needs to locate the right files. The only tool it has is the file system itself.
   </p>
 
   <div class="context-diagram fade-in">
@@ -451,7 +451,7 @@ input[type=range].styled::-webkit-slider-thumb {
     <div class="cd-row">
       <div class="cd-box glass-panel">
         <div class="cd-title">Linux FHS</div>
-        <div class="cd-sub">ls, cat, grep — one directory at a time</div>
+        <div class="cd-sub">ls, cat, grep: one directory at a time</div>
       </div>
     </div>
     <div class="cd-connector"></div>
@@ -481,6 +481,9 @@ input[type=range].styled::-webkit-slider-thumb {
     <div style="font-size: 18px; margin: 20px 0;">
       $$ \text{Cost} = \sum_{i=1}^{k} \left( T_{\text{ls}} + T_{\text{read}} \right) \sim \mathcal{O}(N \cdot T) $$
     </div>
+    <div style="color: #8a8faa; font-size: 14px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+      <strong style="color: #e8eaf2;">Plain English:</strong> Every time the AI looks inside a folder (<code>ls</code>) or reads a file (<code>read</code>), it wastes memory (tokens). If you have a huge project with thousands of files ($N$), the cost explodes linearly. The bigger the project, the more memory is wasted just <em>searching</em>.
+    </div>
     <div style="color: var(--red); font-weight: 600; font-family: var(--mono); font-size: 15px; margin-top: 20px;">
       Unbounded \(\mathcal{O}(N)\) Growth
     </div>
@@ -500,7 +503,7 @@ input[type=range].styled::-webkit-slider-thumb {
 <section class="scene middle-style" id="scene-counter">
   <div class="scene-label fade-in">Act II · Feel It Live</div>
   <h2 class="scene-headline fade-in">Drag the slider.<br>Watch the <span class="accent-red">cost explode</span>.</h2>
-  <p class="scene-body fade-in">This isn't theoretical. Move the slider and watch what a traditional FHS crawl costs in tokens — versus what the Semantic approach costs. One number stays flat.</p>
+  <p class="scene-body fade-in">This isn't theoretical. Move the slider and watch what a traditional FHS crawl costs in tokens compared to what the Semantic approach costs. One number stays flat.</p>
 
   <div class="file-slider-wrap fade-in">
     <div class="slider-label">
@@ -529,13 +532,16 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="scene-label fade-in">Act III · Answer</div>
   <h2 class="scene-headline fade-in">We skip the maze.<br><span class="accent-green">Teleport</span> straight to the code.</h2>
   <p class="scene-body fade-in">
-    Instead of crawling, the agent emits a natural language <strong>Intent Vector</strong>. A local FAISS index holds the entire codebase mapped into embedding space. A Cosine Similarity search finds the exact file — in <strong>constant time</strong>, regardless of repo size.
+    Instead of crawling, the agent emits a natural language <strong>Intent Vector</strong>. A local FAISS index holds the entire codebase mapped into embedding space. A Cosine Similarity search finds the exact file in <strong>constant time</strong>, regardless of repo size.
   </p>
 
   <div class="solution-math fade-in glass-panel">
     <div style="color: #8a8faa; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Retrieval Target Formula</div>
     <div style="font-size: 18px; margin: 20px 0;">
       $$ \text{Target} = \text{argmax}_{f \in F} \left( \frac{\mathbf{v}_{\text{intent}} \cdot \mathbf{v}_f}{\|\mathbf{v}_{\text{intent}}\| \|\mathbf{v}_f\|} \right) $$
+    </div>
+    <div style="color: #8a8faa; font-size: 14px; margin-top: 16px; text-align: left; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+      <strong style="color: #e8eaf2;">Plain English:</strong> Instead of searching folder by folder, we convert what the AI wants into a math coordinate (Intent Vector). We do the same for all files. Then, we calculate the closest match instantly using Cosine Similarity. It takes one exact math operation, and zero crawling.
     </div>
     <div style="color: var(--green); font-weight: 600; font-family: var(--mono); font-size: 15px; margin-top: 20px;">
       Constant \(\mathcal{O}(1)\) Time \(= 15\) tokens
@@ -557,7 +563,7 @@ input[type=range].styled::-webkit-slider-thumb {
   <div class="scene-label fade-in">Act IV · Proof</div>
   <h2 class="scene-headline fade-in">The numbers<br>don't <span class="accent-cyan">lie</span>.</h2>
   <p class="scene-body fade-in">
-    Token expenditure on a log scale and multi-axis performance. The FHS approach grows without ceiling. The Semantic approach is a flat line at 15 — dominating across all efficiency metrics.
+    Token expenditure on a log scale and multi-axis performance. The FHS approach grows without ceiling. The Semantic approach is a flat line at 15, dominating across all efficiency metrics.
   </p>
 
   <div class="chart-layout fade-in">
